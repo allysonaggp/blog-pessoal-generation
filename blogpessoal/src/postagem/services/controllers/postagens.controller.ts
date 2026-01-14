@@ -5,6 +5,10 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
+  Body,
+  Put,
+  Delete,
+  Post,
 } from '@nestjs/common';
 import { Postagem } from '../../entities/postagem.entity';
 import { PostagemService } from '../postagem.services';
@@ -25,9 +29,27 @@ export class PostagemController {
     return this.postagemService.findById(id);
   }
 
-  @Get('/tituloo/:titulo')
+  @Get('/titulo/:titulo')
   @HttpCode(HttpStatus.OK)
   findByAllTitulo(@Param('titulo') titulo: string): Promise<Postagem[]> {
     return this.postagemService.findAllByTitulo(titulo);
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() postagem: Postagem): Promise<Postagem> {
+    return this.postagemService.create(postagem);
+  }
+
+  @Put()
+  @HttpCode(HttpStatus.OK)
+  update(@Body() postagem: Postagem): Promise<Postagem> {
+    return this.postagemService.update(postagem);
+  }
+
+  @Delete('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.postagemService.delete(id);
   }
 }
