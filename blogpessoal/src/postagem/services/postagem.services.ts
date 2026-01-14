@@ -15,7 +15,10 @@ export class PostagemService {
   }
 
   async findById(id: number): Promise<Postagem> {
-    const postagem = await this.postagemRepository.findOne({ where: { id } });
+    const postagem = await this.postagemRepository.findOne({
+      where: { id },
+      relations: { tema: true },
+    });
     if (!postagem)
       throw new HttpException('Postagem não encontrada', HttpStatus.NOT_FOUND);
     return postagem;
@@ -23,9 +26,8 @@ export class PostagemService {
 
   async findAllByTitulo(titulo: string): Promise<Postagem[]> {
     return await this.postagemRepository.find({
-      where: {
-        titulo: ILike(`%${titulo}%`),
-      },
+      where: { titulo: ILike(`%${titulo}%`) },
+      relations: { tema: true },
     });
   }
 
