@@ -10,8 +10,8 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
-import { Postagem } from '../../entities/postagem.entity';
-import { PostagemService } from '../postagem.services';
+import { Postagem } from '../entities/postagem.entity';
+import { PostagemService } from '../services/postagem.services';
 
 @Controller('/postagens')
 export class PostagemController {

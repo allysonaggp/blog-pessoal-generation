@@ -10,8 +10,8 @@ import {
   Delete,
   Post,
 } from '@nestjs/common';
-import { Tema } from '../../entities/tema.entity';
-import { TemaService } from '../tema.services';
+import { Tema } from '../entities/tema.entity';
+import { TemaService } from '../services/tema.services';
 
 @Controller('/tema')
 export class TemaController {
