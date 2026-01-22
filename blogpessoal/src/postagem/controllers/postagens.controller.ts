@@ -11,7 +11,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { Postagem } from '../entities/postagem.entity';
-import { PostagemService } from '../services/postagem.services';
+import { PostagemService } from '../services/postagem.service';
 
 @Controller('/postagens')
 export class PostagemController {

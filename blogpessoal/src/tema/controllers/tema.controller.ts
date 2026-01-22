@@ -11,9 +11,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { Tema } from '../entities/tema.entity';
-import { TemaService } from '../services/tema.services';
+import { TemaService } from '../services/tema.service';
 
-@Controller('/tema')
+@Controller('/temas')
 export class TemaController {
   constructor(private readonly TemaService: TemaService) {}
 
