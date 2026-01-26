@@ -1,24 +1,28 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-jwt';
 import { AuthService } from '../services/auth.service';
+import { Strategy } from 'passport-local';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   private _usernameField: string;
-  private _passswordField: string;
+  private _passwordField: string;
 
+  // ? esse cara vai ficar dando erro até criar o arquivo AuthService e importar ele aqui
   constructor(private readonly authService: AuthService) {
     super();
     this._usernameField = 'usuario';
-    this._passswordField = 'senha';
+    this._passwordField = 'senha';
   }
 
-  async validate(usuariio: string, senha: string): Promise<any> {
-    const validaUsuario = await this.authService.validateUser(Usuario, senha);
+  async validate(usuario: string, senha: string): Promise<any> {
+    //? aqui tbm vai ficar dando erro até criar o arquivo AuthService
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const validaUsuario = await this.authService.validateUser(usuario, senha);
     if (!validaUsuario) {
-      throw new UnauthorizedException('Usuário e/ou senha incorretos');
+      throw new UnauthorizedException('Usuário e/ou senha incorretos!');
     }
+
     return validaUsuario;
   }
 }

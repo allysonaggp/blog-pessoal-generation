@@ -20,20 +20,26 @@ export class AuthService {
       password,
       buscarUsuario.senha,
     );
+
     if (buscarUsuario && matchPassword) {
+      // Aqui a senha nunca e usada porque estamos falando que não queremos que retone ela na logica
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { senha, ...resposta } = buscarUsuario;
       return resposta;
     }
     return null;
   }
+
   async login(usuarioLogin: UsuarioLogin) {
     const payload = { sub: usuarioLogin.usuario };
     const buscarUsuario = await this.usuarioService.findByUsuario(
       usuarioLogin.usuario,
     );
+
     return {
       id: buscarUsuario?.id,
-      nome: buscarUsuario.nome,
+      nome: buscarUsuario?.nome,
+      usuario: usuarioLogin.usuario,
       senha: '',
       foto: buscarUsuario?.foto,
       token: `Bearer ${this.jwtService.sign(payload)}`,
