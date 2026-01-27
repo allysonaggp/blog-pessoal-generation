@@ -7,11 +7,12 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { AppController } from './app.controller';
 import { ProdService } from './data/services/prod.service';
 import { ConfigModule } from '@nestjs/config';
+import { DevService } from './data/services/dev.service';
 
 // esse modulo serve para se conectar com o banco de dados
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       useClass: ProdService,
       imports: [ConfigModule],
